@@ -118,7 +118,7 @@ const HomePage = () => {
                   shopLists
                     ?.filter((val) => {
                       if (keyword === "") {
-                        return val;
+                        return val
                       } else if (
                         val.shopLocation
                           ?.toLowerCase()

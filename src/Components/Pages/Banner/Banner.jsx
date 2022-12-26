@@ -20,15 +20,16 @@ const Banner = () => {
     slideRef.current.classList.remove('fade-anim')
   }
 
-  useEffect(()=>{
+  useEffect(()=>{ 
     slideRef.current.addEventListener('animationend',removeAnimation)
     slideRef.current.addEventListener('mouseenter',pauseInterval)
     slideRef.current.addEventListener('mouseleave',startSlider)
+    
     startSlider()
     return ()=>{
       pauseInterval()
     }
-  })
+  },[])
 
   const startSlider= ()=>{
     slideInterval= setInterval(() => {

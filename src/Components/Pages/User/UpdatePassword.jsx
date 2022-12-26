@@ -9,7 +9,7 @@ import LoadingComponent from "../../../Utils/LoadingComponent";
 
 //Form schema
 const formSchema = Yup.object({
-  password: Yup.string().required("Password is required"),
+  password: Yup.string().required("New Password is required"),
   confirmpassword: Yup.string().required("Confirm Password is required"),
 });
 
@@ -72,7 +72,7 @@ const UpdatePassword = () => {
                   onBlur={formik.handleBlur("password")}
                   className="w-full pr-6 pl-4 py-4 font-bold placeholder-gray-300 rounded focus:outline-none"
                   type="password"
-                  placeholder=" Password"
+                  placeholder="New Password"
                 />
               </div>
               {/* Err msg */}
