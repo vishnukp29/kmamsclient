@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { deleteShopAction } from "../../Redux/Slices/shopSlices";
 import {toast} from 'react-toastify'
 
@@ -8,17 +8,16 @@ const DeleteShop = ({ open, setOpen, commentId, value }) => {
     const [showModal, setShowModal] = React.useState(false);
     
     const navigate = useNavigate();
-    const { id } = useParams();
     const dispatch = useDispatch();
 
     //select Shop details from store
     const shop = useSelector((state) => state?.shops);
-    const { shopDetails, loading, appErr, serverErr, shopDeleted } = shop;
+    const { shopDetails, loading,shopDeleted } = shop;
 
-    //Get login user
-    const user = useSelector(state => state.users);
-    const {userAuth} = user;
-    const isCreatedBy = shopDetails?.user === userAuth?._id;
+    // //Get login user
+    // const user = useSelector(state => state.users);
+    // const {userAuth} = user;
+    // const isCreatedBy = shopDetails?.user === userAuth?._id;
 
     if(shopDeleted){
       toast.success('Shop Removed successfully')

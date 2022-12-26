@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"; 
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
 import { updateShopAction } from "../../Redux/Slices/shopSlices";
 import {toast} from 'react-toastify'
 
@@ -19,10 +19,10 @@ const EditShop = ({ open, setOpen, commentId, value }) => {
   const shopUpdate = useSelector((state) => state.shops);
   const { loading, shopUpdated } = shopUpdate;
 
-  //Get login user
-    const user = useSelector(state => state.users);
-    const {userAuth} = user;
-    const isCreatedBy = shopDetails?.user === userAuth?._id;
+  // //Get login user
+  //   const user = useSelector(state => state.users);
+  //   const {userAuth} = user;
+  //   const isCreatedBy = shopDetails?.user === userAuth?._id;
 
     if(shopUpdated){
       toast.success('Shop Updated successfully')
