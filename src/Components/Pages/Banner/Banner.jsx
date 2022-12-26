@@ -28,7 +28,7 @@ const Banner = () => {
     return ()=>{
       pauseInterval()
     }
-  },[])
+  })
 
   const startSlider= ()=>{
     slideInterval= setInterval(() => {
