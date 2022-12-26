@@ -48,7 +48,7 @@ const AdminNavbar = ({isLogin}) => {
                 </div>
                 <div className="flex-shrink-0 flex items-center text-white text-2xl font-semibold">
                   {/* Logo */}
-                  <img src={Logo} alt="" className="w-40 h-20"/>
+                  <img src={Logo} alt="" className="w-40 h-20 sm:w-24 sm:h-12"/>
                 </div>
                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
                   {navigation.map((item) => (
