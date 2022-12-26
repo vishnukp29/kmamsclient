@@ -66,20 +66,20 @@ const Register = () => {
   return (
     <section className="min-h-screen  py-10 2xl:py-20 bg-white overflow-hidden">
       <div className="container px-4 mx-auto">
-        <div className="max-w-5xl mx-auto font-display">
+        <div className="max-w-5xl mx-auto font-display px-4">
           <div className="flex  w-full sm:flex flex-wrap mt-8">
-            <h2 className="mb-5 text-6xl text-lime-500 font-bold ">
+            <h2 className="mb-5 lg:text-6xl text-4xl text-lime-500 font-bold ">
               SHOP OWNERS{" "}
             </h2>
-            <h2 className="mb-5 text-6xl text-gray-900 font-bold ">
+            <h2 className="mb-5 lg:text-6xl text-4xl text-gray-900 font-bold lg:mx-4">
               REGISTER HERE
             </h2>
           </div>
           <div className="flex flex-wrap items-start -mx-4 mt-8">
             <div className="w-full lg:w-1/2 px-4">
-              <div className="px-2 lg:px-10 py-6 lg:py-12 bg-gray-900 rounded-xl border border-gray-500 drop-shadow-lg ">
+              <div className="px-8 lg:px-10 py-6 lg:py-12 bg-gray-900 rounded-xl border border-gray-500 drop-shadow-lg ">
                 <form  onSubmit={formik.handleSubmit}>
-                  <h2 className="mb-5 text-4xl text-lime-300 font-bold font-heading">
+                  <h2 className="mb-5 lg:text-4xl text-2xl text-lime-300 font-bold font-heading">
                     REGISTER HERE
                   </h2>
 
@@ -202,7 +202,7 @@ const Register = () => {
 
             <div className="w-full lg:w-1/2 px-4 lg:mb-0 mt-10">
               <div className="max-w-md">
-                <span className=" text-lime-500 font-bold text-4xl">
+                <span className=" text-lime-500 font-bold text-2xl lg:text-3xl">
                   Follow the Instructions to Join
                 </span>
                 <h2 className="mt-2 text-2xl font-bold font-heading text-gray-900">

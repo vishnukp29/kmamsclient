@@ -8,12 +8,9 @@ const ContactUs = () => {
         <div className="container px-4 mx-auto font-display">
           <div className="flex flex-wrap items-center -mx-4 mb-10 2xl:mb-14">
             <div className="w-full lg:w-1/2 px-4 mb-16 lg:mb-0">
-              <div className=" w-full sm:flex flex-wrap mt-8">
-                <h2 className="mb-5 text-8xl text-lime-500 font-bold  mx-5">
-                  Contact
-                </h2>
-                <h2 className="mb-5 text-8xl text-gray-900 font-bold mx-5">
-                  Us
+              <div className=" w-full sm:flex  mt-8">
+                <h2 className="mb-5 lg:text-8xl text-5xl text-lime-500 font-bold">
+                  Contact<span className="mb-5 lg:text-8xl text-5xl text-gray-900 font-bold">Us</span>
                 </h2>
               </div>
             </div>
