@@ -47,9 +47,9 @@ const ShopDetails = () => {
                 </h2>
                 <div class="flex mb-4">
                   <span class="flex items-center">
-                    <span class="text-gray-600 text-md ">{shopDetails?.mail}</span>
+                    <span class="text-gray-600 text-sm ">{shopDetails?.mail}</span>
                   </span>
-                  <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 text-md ">
+                  <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 text-sm ">
                     {shopDetails?.mobileNum}
                   </span>
                 </div>
@@ -57,7 +57,7 @@ const ShopDetails = () => {
                   {shopDetails?.shopDescription}
                 </p>
                 <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
-                  <div class="flex items-center font-semibold text-md">
+                  <div class="flex items-center font-semibold text-sm">
                     <span class="mr-3">{shopDetails?.shopAddress}</span>
                   </div>
                 </div>
