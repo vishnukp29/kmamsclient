@@ -200,25 +200,22 @@ const Register = () => {
               </div>
             </div>
 
-            <div className="w-full lg:w-1/2 px-4 lg:mb-0 mt-10">
+            <div className="w-full lg:w-1/2 p-5 lg:mb-0 mt-10 bg-slate-50 rounded-lg ">
               <div className="max-w-md">
                 <span className=" text-lime-500 font-bold text-2xl lg:text-3xl">
-                  Follow the Instructions to Join
+                  Follow these Instructions to Join
                 </span>
-                <h2 className="mt-2 text-2xl font-bold font-heading text-gray-900">
-                  Instructions 1
+                <h2 className="mt-4 text-md font-bold font-heading text-gray-900">
+                  Click on “Register” button in case not registered yet.
                 </h2>
-                <h2 className="mt-2 text-2xl font-bold font-heading text-gray-900">
-                  Instructions 2
+                <h2 className="mt-4 text-md font-bold font-heading text-gray-900">
+                  Already registered candidates may login with their registered email and password.
                 </h2>
-                <h2 className="mt-2 text-2xl font-bold font-heading text-gray-900">
-                  Instructions 3
+                <h2 className="mt-4 text-md font-bold font-heading text-gray-900">
+                  Use valid Email id and Phone number to register.
                 </h2>
-                <h2 className="mt-2 text-2xl font-bold font-heading text-gray-900">
-                  Instructions 4
-                </h2>
-                <h2 className="mt-2 text-2xl font-bold font-heading text-gray-900">
-                  Instructions 5
+                <h2 className="mt-4 text-md font-bold font-heading text-gray-900">
+                  Use a strong password to register.
                 </h2>
               </div>
             </div>

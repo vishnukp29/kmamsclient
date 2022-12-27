@@ -197,6 +197,46 @@ const JoinNow = () => {
                     {formik.touched.shopAddress && formik.errors.shopAddress}
                   </div>
 
+                  {/* Shop Image */}
+                  <div className="flex items-center pl-6 mb-3 bg-white rounded-md border border-slate-400">
+                    {preview ? (
+                      <img
+                        src={imgPreview}
+                        alt=""
+                        onClick={() => {
+                          setImgPreview(null);
+                        }}
+                      />
+                    ) : (
+                      <Container className="container bg-gray-700">
+                        <Dropzone
+                          onBlur={formik.handleBlur("shopImage")}
+                          accept="image/jpeg, image/png, image/webp"
+                          // accept="image/*"
+                          onDrop={(acceptedFiles) => {
+                            formik.setFieldValue("shopImage", acceptedFiles[0]);
+                          }}
+                        >
+                          {({ getRootProps, getInputProps }) => (
+                            <div className="container">
+                              <div
+                                {...getRootProps({
+                                  className: "dropzone",
+                                  onDrop: (event) => event.stopPropagation(),
+                                })}
+                              >
+                                <input {...getInputProps()} />
+                                <p className="text-gray-300 text-lg cursor-pointer hover:text-gray-500">
+                                  Click here to select Shop Image
+                                </p>
+                              </div>
+                            </div>
+                          )}
+                        </Dropzone>
+                      </Container>
+                    )}
+                  </div>
+
                   {/* Establishment Certificate */}
                   <div className="flex items-center pl-6 mb-3 bg-white rounded-md border border-slate-400">
                     {preview ? (
@@ -269,45 +309,6 @@ const JoinNow = () => {
                     {formik.touched.mail && formik.errors.mail}
                   </div>
                   
-                  {/* Shop Image */}
-                  <div className="flex items-center pl-6 mb-3 bg-white rounded-md border border-slate-400">
-                    {preview ? (
-                      <img
-                        src={imgPreview}
-                        alt=""
-                        onClick={() => {
-                          setImgPreview(null);
-                        }}
-                      />
-                    ) : (
-                      <Container className="container bg-gray-700">
-                        <Dropzone
-                          onBlur={formik.handleBlur("shopImage")}
-                          accept="image/jpeg, image/png, image/webp"
-                          // accept="image/*"
-                          onDrop={(acceptedFiles) => {
-                            formik.setFieldValue("shopImage", acceptedFiles[0]);
-                          }}
-                        >
-                          {({ getRootProps, getInputProps }) => (
-                            <div className="container">
-                              <div
-                                {...getRootProps({
-                                  className: "dropzone",
-                                  onDrop: (event) => event.stopPropagation(),
-                                })}
-                              >
-                                <input {...getInputProps()} />
-                                <p className="text-gray-300 text-lg cursor-pointer hover:text-gray-500">
-                                  Click here to select Shop Image
-                                </p>
-                              </div>
-                            </div>
-                          )}
-                        </Dropzone>
-                      </Container>
-                    )}
-                  </div>
 
                   {/* Map Location */}
                   <div className="flex items-center pl-6 mb-3 bg-white rounded-md border border-slate-400">
@@ -346,25 +347,22 @@ const JoinNow = () => {
               </div>
             </div>
 
-            <div className="w-full lg:w-1/2 px-4 lg:mb-0 mt-10">
+            <div className="w-full lg:w-1/2 p-5 lg:mb-0 mt-10 bg-slate-50 rounded-lg ">
               <div className="max-w-md">
-                <span className=" text-lime-500 font-bold text-4xl">
-                  Follow the Instructions to Join
+                <span className=" text-lime-500 font-bold text-2xl lg:text-3xl">
+                  Follow these Instructions to Register their Shops
                 </span>
-                <h2 className="mt-2 text-2xl font-bold font-heading text-gray-900">
-                  Instructions 1
+                <h2 className="mt-4 text-md font-bold font-heading text-gray-900">
+                  Registered shop owners can register their shop here.
                 </h2>
-                <h2 className="mt-2 text-2xl font-bold font-heading text-gray-900">
-                  Instructions 2
+                <h2 className="mt-4 text-md font-bold font-heading text-gray-900">
+                  Registered shop owners may add their shop details here.
                 </h2>
-                <h2 className="mt-2 text-2xl font-bold font-heading text-gray-900">
-                  Instructions 3
+                <h2 className="mt-4 text-md font-bold font-heading text-gray-900">
+                  All the fileds are mandatory.
                 </h2>
-                <h2 className="mt-2 text-2xl font-bold font-heading text-gray-900">
-                  Instructions 4
-                </h2>
-                <h2 className="mt-2 text-2xl font-bold font-heading text-gray-900">
-                  Instructions 5
+                <h2 className="mt-4 text-md font-bold font-heading text-gray-900">
+                  To register a new shop, must provide shop establishment certificate.
                 </h2>
               </div>
             </div>
