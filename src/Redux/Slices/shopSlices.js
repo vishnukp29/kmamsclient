@@ -92,6 +92,22 @@ export const fetchShopsAction = createAsyncThunk(
   }
 );
 
+//fetch all Shops
+export const fetchApprovedShopsAction = createAsyncThunk(
+  "shop/approve",
+  async (shop, { rejectWithValue, getState, dispatch }) => {
+    try {
+      const { data } = await axios.get(
+        `${baseUrl}/api/shop/approved`
+      );
+      return data
+    } catch (error) {
+      if (!error?.response) throw error;
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
 //fetch Shop details
 export const fetchShopDetails = createAsyncThunk(
   "shop/detail",
@@ -211,6 +227,22 @@ const shopSlice = createSlice({
       state.serverErr = action?.error?.message;
     });
 
+    // fetch Approved Shops
+    builder.addCase(fetchApprovedShopsAction.pending,(state,action)=>{
+      state.loading=true;
+    });
+    builder.addCase(fetchApprovedShopsAction.fulfilled,(state,action)=>{ 
+      state.shopsApproved=action?.payload;      
+      state.loading=false;
+      state.appErr = undefined;
+      state.serverErr = undefined;
+    });
+    builder.addCase(fetchApprovedShopsAction.rejected, (state, action) => {
+      state.loading = false;
+      state.appErr = action?.payload?.message;
+      state.serverErr = action?.error?.message;
+    });
+
     //fetch new Shops
     builder.addCase(fetchNewShopsAction.pending, (state, action) => {
       state.loading = true;
@@ -246,7 +278,7 @@ const shopSlice = createSlice({
     //Delete Shop
     builder.addCase(deleteShopAction.pending, (state, action) => {
       state.loading = true;
-    });
+    }); 
     builder.addCase(deleteShopAction, (state, action) => {
       state.isDeleted = true;
     });

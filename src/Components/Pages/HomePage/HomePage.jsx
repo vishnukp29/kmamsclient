@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchShopsAction,
   fetchNewShopsAction,
+  fetchApprovedShopsAction
 } from "../../../Redux/Slices/shopSlices";
 import LoadingComponent from "../../../Utils/LoadingComponent";
 
@@ -13,7 +14,9 @@ const HomePage = () => {
 
   //select post from store
   const shop = useSelector((state) => state?.shops);
-  const { shopLists, loading, appErr, serverErr, newShopLists } = shop;
+  const { shopLists, loading, appErr, serverErr, newShopLists, shopsApproved } = shop;
+
+  console.log(shopsApproved);
 
   console.log(newShopLists);
   console.log(shopLists);
@@ -22,6 +25,7 @@ const HomePage = () => {
   useEffect(() => {
     dispatch(fetchShopsAction());
     dispatch(fetchNewShopsAction());
+    dispatch(fetchApprovedShopsAction());
   }, [dispatch]);
 
   return (
@@ -110,12 +114,12 @@ const HomePage = () => {
                   <h1 className="text-red-600 text-2xl text-center">
                     {serverErr} {appErr}
                   </h1>
-                ) : shopLists?.length <= 0 ? (
+                ) : shopsApproved?.length <= 0 ? (
                   <h1 className="text-3xl font-bold text-center">
                     No Shops Found
                   </h1>
                 ) : (
-                  shopLists
+                  shopsApproved
                     ?.filter((val) => {
                       if (keyword === "") {
                         return val

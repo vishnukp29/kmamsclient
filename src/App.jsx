@@ -19,6 +19,8 @@ import UploadProfilePhoto from "./Components/Pages/Profile/UploadProfilePhoto";
 import PrivateProtected from "./Components/Navigation/ProtectedRoutes/PrivateProtected";
 import AdminProtected from "./Components/Navigation/ProtectedRoutes/AdminProtected";
 import UpdateShop from "./Components/Pages/Shop/UpdateShop";
+import ShopsList from "./Components/Pages/AllShops/ShopsList";
+import AdminShopDetails from "./Components/Pages/AllShops/AdminShopDetails";
 
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
           
           <Route path='/dashboard' element={<AdminProtected><Dashboard/></AdminProtected>}/>
           <Route path='/retailors' element={<AdminProtected><RetailorsList/></AdminProtected>}/>
+          <Route path='/all-shops' element={<AdminProtected><ShopsList/></AdminProtected>}/>
 
            
           <Route path='/join-now' element={<PrivateProtected><JoinNow/></PrivateProtected>}/>
@@ -46,6 +49,7 @@ function App() {
           <Route path='/updateshop/:id' element={<PrivateProtected><UpdateShop/></PrivateProtected>}/>
           
           <Route path='/shop/:id' element={<ShopDetails/>}/>
+          <Route path='/shopdetail/:id' element={<AdminProtected><AdminShopDetails/></AdminProtected>}/>
         </Routes>
         <Footer />
       </Router>
