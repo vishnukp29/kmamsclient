@@ -1,25 +1,39 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchShopsAction } from "../../../Redux/Slices/shopSlices";
+import { fetchShopsAction, fetchApprovedShopsAction } from "../../../Redux/Slices/shopSlices";
 import { fetchUsersAction } from "../../../Redux/Slices/userSlices";
+import { FaUsers } from "react-icons/fa";
+import { BsShop } from "react-icons/bs";
+import { GiVerticalBanner,GiShop } from "react-icons/gi";
+import { FcApproval } from "react-icons/fc";
+import { MdOutlineError,MdPendingActions } from "react-icons/md";
 
 const Dashboard = () => {
   // Select user from from store
   const user = useSelector((state) => state?.users);
   const { usersList } = user;
+
   const allUsers = usersList?.length;
   console.log(allUsers);
 
-  //select post from store
+  //select shop from store
   const shop = useSelector((state) => state?.shops);
-  const { shopLists } = shop;
+  const { shopLists,shopsApproved } = shop;
+
   const shops = shopLists?.length;
   console.log(shops);
+
+  const approvedShops = shopsApproved?.length
+  console.log(approvedShops);
+
+  const pendingShops = shops-approvedShops
+  console.log(pendingShops);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchShopsAction());
     dispatch(fetchUsersAction());
+    dispatch(fetchApprovedShopsAction());
   }, [dispatch]);
 
   return (
@@ -39,43 +53,154 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="flex justify-around sm:flex flex-wrap bg-white p-4 rounded-lg drop-shadow-md">
-            <div class="flex justify-center p-2">
-              <div class="block rounded-lg shadow-lg bg-gray-700 max-w-sm text-center w-96">
-                <div class="py-3 px-6 border-b border-gray-300 text-lime-300 font-bold">
-                  Total Retailors
+          <div className="flex justify-around sm:flex flex-wrap p-4 rounded-lg drop-shadow-md">
+            <div class="flex justify-center p-2 transition transform hover:-translate-y-1">
+              <div class="block rounded-lg shadow-lg bg-white max-w-sm text-center w-96">
+                <div class="py-3 px-6 border-b border-gray-300 flex justify-between">
+                  <label className="text-lime-800 font-bold">
+                    Total Retailors
+                  </label>
+                  <label
+                    htmlFor=""
+                    className="text-fuchsia-600 text-2xl font-medium"
+                  >
+                    <FaUsers />
+                  </label>
                 </div>
                 <div class="p-6">
-                  <h5 class="text-gray-100 text-xl font-medium mb-2">
-                    {allUsers}
+                  <h5 class="text-fuchsia-600 text-4xl font-bold mb-2">
+                    {allUsers}{" "}
+                    <span className="text-gray-400 text-sm font-medium">
+                      {" "}
+                      Users
+                    </span>
                   </h5>
                 </div>
               </div>
             </div>
 
-            <div class="flex justify-center p-2">
-              <div class="block rounded-lg shadow-lg bg-gray-700 max-w-sm text-center w-96">
-                <div class="py-3 px-6 border-b border-gray-300 text-lime-300 font-bold">
-                  Total Shops
+            <div class="flex justify-center p-2 transition transform hover:-translate-y-1">
+              <div class="block rounded-lg shadow-lg bg-white max-w-sm text-center w-96">
+                <div class="py-3 px-6 border-b border-gray-300 flex justify-between">
+                  <label className="text-lime-800 font-bold">Total Shops</label>
+                  <label
+                    htmlFor=""
+                    className="text-cyan-800 text-2xl font-medium"
+                  >
+                    <GiShop />
+                  </label>
                 </div>
                 <div class="p-6">
-                  <h5 class="text-gray-100 text-xl font-medium mb-2">
-                    {shops}
+                  <h5 class="text-cyan-800 text-4xl font-medium mb-2">
+                    {shops}{" "}
+                    <span className="text-gray-400 text-sm font-medium">
+                      {" "}
+                      Shops
+                    </span>
                   </h5>
                 </div>
               </div>
             </div>
 
-            <div class="flex justify-center p-2">
-              <div class="block rounded-lg shadow-lg bg-gray-700 max-w-sm text-center w-96">
-                <div class="py-3 px-6 border-b border-gray-300 text-lime-300 font-bold">
-                  Banners</div>
+            <div class="flex justify-center p-2 transition transform hover:-translate-y-1">
+              <div class="block rounded-lg shadow-lg bg-white max-w-sm text-center w-96">
+                <div class="py-3 px-6 border-b border-gray-300 flex justify-between">
+                  <label className="text-lime-800 font-bold">
+                    Total Banners
+                  </label>
+                  <label
+                    htmlFor=""
+                    className="text-pink-600 text-2xl font-medium"
+                  >
+                    <GiVerticalBanner />
+                  </label>
+                </div>
                 <div class="p-6">
-                  <h5 class="text-gray-100 text-xl font-medium mb-2">3</h5>
+                  <h5 class="text-pink-600 text-4xl font-medium mb-2">
+                    3{" "}
+                    <span className="text-gray-400 text-sm font-medium">
+                      {" "}
+                      Banners
+                    </span>
+                  </h5>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-center p-2 transition transform hover:-translate-y-1">
+              <div class="block rounded-lg shadow-lg bg-white max-w-sm text-center w-96">
+                <div class="py-3 px-6 border-b border-gray-300 flex justify-between">
+                  <label className="text-lime-800 font-bold">
+                    Approved Shops
+                  </label>
+                  <label
+                    htmlFor=""
+                    className="text-lime-600 text-2xl font-medium"
+                  >
+                    <FcApproval />
+                  </label>
+                </div>
+                <div class="p-6">
+                  <h5 class="text-lime-600 text-4xl font-medium mb-2">
+                    {approvedShops} <span className="text-gray-400 text-sm font-medium">Shops Approved</span>
+                  </h5>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-center p-2 transition transform hover:-translate-y-1">
+              <div class="block rounded-lg shadow-lg bg-white max-w-sm text-center w-96">
+              <div class="py-3 px-6 border-b border-gray-300 flex justify-between">
+                  <label className="text-lime-800 font-bold">
+                    Denied Shops
+                  </label>
+                  <label
+                    htmlFor=""
+                    className="text-red-500 text-2xl font-medium"
+                  >
+                    <MdOutlineError />
+                  </label>
+                </div>
+                <div class="p-6">
+                  <h5 class="text-red-500 text-4xl font-medium mb-2">
+                    0{" "}
+                    <span className="text-gray-400 text-sm font-medium">
+                      Shops Denied
+                    </span>
+                  </h5>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-center p-2 transition transform hover:-translate-y-1">
+              <div class="block rounded-lg shadow-lg bg-white max-w-sm text-center w-96">
+              <div class="py-3 px-6 border-b border-gray-300 flex justify-between">
+                  <label className="text-lime-800 font-bold">
+                    Shops Pending for Approval
+                  </label>
+                  <label
+                    htmlFor=""
+                    className="text-yellow-500 text-2xl font-medium"
+                  >
+                    <MdPendingActions />
+                  </label>
+                </div>
+                <div class="p-6">
+                  <h5 class="text-yellow-500 text-4xl font-medium mb-2">
+                    {pendingShops}{" "}
+                    <span className="text-gray-400 text-sm font-medium">
+                      {" "}
+                      Shops Pending
+                    </span>
+                  </h5>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="container px-4 mx-auto border p-3 rounded-md">
+          
         </div>
       </section>
     </div>

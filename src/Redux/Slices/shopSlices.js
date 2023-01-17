@@ -92,9 +92,61 @@ export const fetchShopsAction = createAsyncThunk(
   }
 );
 
-//fetch all Shops
-export const fetchApprovedShopsAction = createAsyncThunk(
+//Approve Shop
+export const approveShopAction = createAsyncThunk(
   "shop/approve",
+  async (shopId, { rejectWithValue, getState, dispatch }) => {
+    //get user token
+    const user = getState()?.users;
+    const { userAuth } = user;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userAuth?.token}`,
+      },
+    };
+    try {
+      const { data } = await axios.put(
+        `${baseUrl}/api/shop/approve/${shopId}`,
+        {},
+        config
+      );
+      return data;
+    } catch (error) {
+      if (!error?.response) throw error;
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+//Approve Shop
+export const denyShopAction = createAsyncThunk(
+  "shop/deny",
+  async (shopId, { rejectWithValue, getState, dispatch }) => {
+    //get user token
+    const user = getState()?.users;
+    const { userAuth } = user;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userAuth?.token}`,
+      },
+    };
+    try {
+      const { data } = await axios.put(
+        `${baseUrl}/api/shop/deny/${shopId}`,
+        {},
+        config
+      );
+      return data;
+    } catch (error) {
+      if (!error?.response) throw error;
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+//fetch Approved Shops
+export const fetchApprovedShopsAction = createAsyncThunk(
+  "shop/approved",
   async (shop, { rejectWithValue, getState, dispatch }) => {
     try {
       const { data } = await axios.get(
@@ -204,6 +256,40 @@ const shopSlice = createSlice({
       state.isUpdated = false
     });
     builder.addCase(updateShopAction.rejected, (state, action) => {
+      state.loading = false;
+      state.appErr = action?.payload?.message;
+      state.serverErr = action?.error?.message;
+    });
+
+    //Approve Shop
+    builder.addCase(approveShopAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(approveShopAction.fulfilled, (state, action) => {
+      state.approveShop = action?.payload;
+      state.loading = false;
+      state.appErr = undefined;
+      state.serverErr = undefined;
+      state.appovedShop = false
+    });
+    builder.addCase(approveShopAction.rejected, (state, action) => {
+      state.loading = false;
+      state.appErr = action?.payload?.message;
+      state.serverErr = action?.error?.message;
+    });
+
+    //Deny Shop
+    builder.addCase(denyShopAction.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(denyShopAction.fulfilled, (state, action) => {
+      state.denyShop = action?.payload;
+      state.loading = false;
+      state.appErr = undefined;
+      state.serverErr = undefined;
+      state.deniedShop = false
+    });
+    builder.addCase(denyShopAction.rejected, (state, action) => {
       state.loading = false;
       state.appErr = action?.payload?.message;
       state.serverErr = action?.error?.message;
