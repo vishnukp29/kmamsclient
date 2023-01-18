@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchShopsAction, fetchApprovedShopsAction } from "../../../Redux/Slices/shopSlices";
 import { fetchUsersAction } from "../../../Redux/Slices/userSlices";
 import { FaUsers } from "react-icons/fa";
-import { BsShop } from "react-icons/bs";
 import { GiVerticalBanner,GiShop } from "react-icons/gi";
 import { FcApproval } from "react-icons/fc";
 import { MdOutlineError,MdPendingActions } from "react-icons/md";
+import { Link } from 'react-router-dom'
+import AddBanner from "../Banner/AddBanner";
+import AllBanners from "../Banner/AllBanners";
+
 
 const Dashboard = () => {
   // Select user from from store
@@ -38,7 +41,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <section className="min-h-screen  py-20 2xl:py-40 bg-gray-50 overflow-hidden">
+      <section className="min-h-screen  py-20 2xl:py-40 overflow-hidden">
         <div className="container px-4 mx-auto font-display">
           <div className="flex flex-wrap items-center mx-4 mb-2 2xl:mb-4">
             <div className="w-full lg:w-1/2 px-4 mb-2">
@@ -57,9 +60,9 @@ const Dashboard = () => {
             <div class="flex justify-center p-2 transition transform hover:-translate-y-1">
               <div class="block rounded-lg shadow-lg bg-white max-w-sm text-center w-96">
                 <div class="py-3 px-6 border-b border-gray-300 flex justify-between">
-                  <label className="text-lime-800 font-bold">
+                  <Link to={`/retailors`} className="text-lime-800 font-bold">
                     Total Retailors
-                  </label>
+                  </Link>
                   <label
                     htmlFor=""
                     className="text-fuchsia-600 text-2xl font-medium"
@@ -82,7 +85,7 @@ const Dashboard = () => {
             <div class="flex justify-center p-2 transition transform hover:-translate-y-1">
               <div class="block rounded-lg shadow-lg bg-white max-w-sm text-center w-96">
                 <div class="py-3 px-6 border-b border-gray-300 flex justify-between">
-                  <label className="text-lime-800 font-bold">Total Shops</label>
+                  <Link to={`/all-shops`} className="text-lime-800 font-bold">Total Shops</Link>
                   <label
                     htmlFor=""
                     className="text-cyan-800 text-2xl font-medium"
@@ -198,10 +201,14 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-
-        <div className="container px-4 mx-auto border p-3 rounded-md">
-          
+        <hr />
+        <div className="container mx-auto p-4 px-8 lg:px-6">
+          <AddBanner/>
         </div>
+        <div className="container mx-auto px-8 lg:px-6 flex flex-wrap justify-start h-72 overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400 scrollbar-thumb-rounded-full">
+          <AllBanners/>
+        </div>
+
       </section>
     </div>
   );

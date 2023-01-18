@@ -9,5 +9,10 @@ module.exports = {
       'display': ['Ubuntu'],
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')
+  ],
+  variants: {
+    scrollbar: ['rounded']
+  }
 }
