@@ -5,7 +5,7 @@ import baseUrl from "../../Utils/baseURL";
 const resetBanner = createAction("banner/reset");
 const resetBannerDelete = createAction("banner/delete");
 
-// Resgister Shop Action
+// Add banner Action
 export const addBannerAction = createAsyncThunk(
   "banner/created",
   async (banner, { rejectWithValue, getState, dispatch }) => {
@@ -24,7 +24,6 @@ export const addBannerAction = createAsyncThunk(
       //http call
       const formData = new FormData();
       formData.append("bannerImage", banner?.bannerImage);
-      console.log(formData, banner);
       const { data } = await axios.post(
         `${baseUrl}/api/banner/add-banner`,
         formData,
@@ -39,7 +38,7 @@ export const addBannerAction = createAsyncThunk(
   }
 );
 
-//fetch all Shops
+//fetch all Banners
 export const fetchBannerAction = createAsyncThunk(
   "banner/list",
   async (banner, { rejectWithValue, getState, dispatch }) => {
@@ -53,7 +52,21 @@ export const fetchBannerAction = createAsyncThunk(
   }
 );
 
-//Delete
+//fetch Banner details
+export const fetchBannerDetails = createAsyncThunk(
+  "banner/detail",
+  async (id, { rejectWithValue, getState, dispatch }) => {
+    try {
+      const { data } = await axios.get(`${baseUrl}/api/banner/${id}`);
+      return data;
+    } catch (error) {
+      if (!error?.response) throw error;
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+//Delete Banner
 export const deleteBannerAction = createAsyncThunk(
   "banner/delete",
   async (bannerId, { rejectWithValue, getState, dispatch }) => {
@@ -119,6 +132,22 @@ const bannerSlice = createSlice({
       state.serverErr = undefined;
     });
     builder.addCase(fetchBannerAction.rejected, (state, action) => {
+      state.loading = false;
+      state.appErr = action?.payload?.message;
+      state.serverErr = action?.error?.message;
+    });
+
+    //fetch Banner Details
+    builder.addCase(fetchBannerDetails.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchBannerDetails.fulfilled, (state, action) => {
+      state.bannerDetails = action?.payload;
+      state.loading = false;
+      state.appErr = undefined;
+      state.serverErr = undefined;
+    });
+    builder.addCase(fetchBannerDetails.rejected, (state, action) => {
       state.loading = false;
       state.appErr = action?.payload?.message;
       state.serverErr = action?.error?.message;

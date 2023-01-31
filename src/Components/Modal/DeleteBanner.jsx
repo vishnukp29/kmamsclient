@@ -1,37 +1,32 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteShopAction , denyShopAction } from "../../Redux/Slices/shopSlices";
 import {toast} from 'react-toastify'
+import { deleteBannerAction } from "../../Redux/Slices/bannerSlices";
 
-const DenyModal = ({ open, setOpen, commentId, value }) => {
+const DeleteBanner = ({ open, setOpen, commentId, value }) => {
     const [showModal, setShowModal] = React.useState(false);
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     //select Shop details from store
-    const shop = useSelector((state) => state?.shops);
-    const { shopDetails, loading,denyShop } = shop;
+    const banner = useSelector((state) => state?.banners);
+    const { bannerDetails, loading,bannerDeleted, isDeleted } = banner;
 
-    // //Get login user
-    // const user = useSelector(state => state.users);
-    // const {userAuth} = user;
-    // const isCreatedBy = shopDetails?.user === userAuth?._id;
-
-    if(denyShop){
-      toast.success('Shop Approval has been Denied')
-       navigate("/all-shops"); 
+    if(bannerDeleted){
+      toast.success('Banner Removed successfully')
+       navigate("/"); 
     }
 
   return (
     <>
       <button
-        className="bg-red-600 text-gray-50  transform hover:-translate-y-0.5 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg transition transform hover:-translate-y-0.5"
         type="button"
         onClick={() => setShowModal(true)}
-      >
-        Deny Shop
+       >
+        Delete
       </button>
       {showModal ? (
         <>
@@ -54,7 +49,7 @@ const DenyModal = ({ open, setOpen, commentId, value }) => {
                 {/*body*/}
                 <div className="relative p-4 flex-auto">
                   <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                  Are you sure you want to deny this Shop?
+                  Are you sure you want to delete this Banner?
                   </p>
                 </div>
                 {/*footer*/}
@@ -72,17 +67,17 @@ const DenyModal = ({ open, setOpen, commentId, value }) => {
                     className="bg-red-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
                   >
-                    Denying Approval, Please Wait
+                    Deleting...
                   </button>
                    ):(
                     <button
                     className="bg-red-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
                     onClick={() =>
-                        dispatch(denyShopAction(shopDetails?._id))
+                        dispatch(deleteBannerAction(bannerDetails?._id))
                       }
                   >
-                    Deny
+                    Delete 
                   </button>
                    )}
                 </div>
@@ -96,4 +91,4 @@ const DenyModal = ({ open, setOpen, commentId, value }) => {
   );
 };
 
-export default DenyModal;
+export default DeleteBanner;

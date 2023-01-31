@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useFormik } from "formik";
+import React, { useEffect, useState } from "react";
+import { UploadIcon } from "@heroicons/react/outline";
+import Dropzone from "react-dropzone";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useFormik } from "formik";
+import styled from "styled-components";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-import Dropzone from "react-dropzone";
-import styled from "styled-components";
 import { addBannerAction } from "../../../Redux/Slices/bannerSlices";
+import LoadingComponent from "../../../Utils/LoadingComponent";
 
-//Form schema
-const formSchema = Yup.object({
-  bannerImage: Yup.string().required("Banner Image is required"),
-});
-
-// CSS for Dropzone
+//Css for dropzone
 const Container = styled.div`
   flex: 1;
   display: flex;
@@ -27,13 +24,13 @@ const Container = styled.div`
   transition: border 0.24s ease-in-out;
 `;
 
+const formSchema = Yup.object({
+  bannerImage: Yup.string().required("Banner Image is required"),
+});
+
 const AddBanner = () => {
-  //dispath
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // preview
-  const [preview, setPreview] = useState("");
 
   //formik
   const formik = useFormik({
@@ -44,20 +41,25 @@ const AddBanner = () => {
       const data = {
         bannerImage: values?.bannerImage,
       };
-      dispatch(addBannerAction(data));
+      dispatch(addBannerAction(values));
     },
     validationSchema: formSchema,
   });
 
-  //select state from store
+  //store data
   const storeData = useSelector((store) => store?.banners);
-  const { loading, bannerAdded } = storeData;
+  const { loading, appErr, serverErr, bannerAdded } = storeData;
+  console.log(bannerAdded);
 
-  //redirect
+  // preview
+  const [preview, setPreview] = useState("");
+
   if (bannerAdded) {
-    toast.success("Banner Image successfully");
+    toast.success("Banner Image Added successfully");
     navigate(`/`);
   }
+
+  console.log(bannerAdded);
 
   let image = formik?.values?.bannerImage;
   useEffect(() => {
@@ -73,60 +75,65 @@ const AddBanner = () => {
   }, [image]);
 
   return (
-    <section className="">
-      <div className="container mx-auto">
-        <div className=" mx-auto font-display">
-          <div className="flex flex-wrap items-start">
-            <div className="w-72 px-4">
-              <div className=" rounded-xl drop-shadow-lg ">
-                <form onSubmit={formik.handleSubmit}>
-                  {/* Banner Image */}
-                  <div className="flex items-center pl-6 mb-3 bg-white rounded-md ">
-                    {preview ? (
-                      <img
-                        src={preview}
-                        alt=""
-                        onClick={() => {
-                          setPreview(null);
-                        }}
-                      />
-                    ) : (
-                      <Container className="container bg-white">
-                        <Dropzone
-                          onBlur={formik.handleBlur("image")}
-                          accept="image/jpeg, image/png"
-                          onDrop={(acceptedFiles) => {
-                            formik.setFieldValue("bannermage", acceptedFiles[0]);
-                          }}
-                        >
-                          {({ getRootProps, getInputProps }) => (
-                            <div className="container">
-                              <div
-                                {...getRootProps({
-                                  className: "dropzone",
-                                  onDrop: (event) => event.stopPropagation(),
-                                })}
-                              >
-                                <input {...getInputProps()} />
-                                <p className="text-gray-800 text-lg cursor-pointer hover:text-gray-500">
-                                  Click here to select image
-                                </p>
-                              </div>
-                            </div>
-                          )}
-                        </Dropzone>
-                      </Container>
-                    )}
-                  </div>
+    <section className="container mx-auto">
+      <div className="mx-auto font-display">
+        <div className="flex flex-wrap items-start">
+          <div className="w-72 px-4">
+            <div className="rounded-xl drop-shadow-lg">
+              <form className="space-y-6" onSubmit={formik.handleSubmit}>
+                {/* Image container here thus Dropzone */}
+                {appErr || serverErr ? (
+                  <h2 className="text-center text-red-500">
+                    {serverErr} {appErr}
+                  </h2>
+                ) : null}
 
-                  <div className="inline-flex mb-10"></div>
+                {preview ? (
+                  <img
+                    src={preview}
+                    alt=""
+                    onClick={() => {
+                      setPreview(null);
+                    }}
+                  />
+                ) : (
+                  <Container className="container bg-white">
+                    <Dropzone
+                      onBlur={formik.handleBlur("bannerImage")}
+                      accept="image/jpeg, image/png"
+                      onDrop={(acceptedFiles) => {
+                        formik.setFieldValue("bannerImage", acceptedFiles[0]);
+                      }}
+                    >
+                      {({ getRootProps, getInputProps }) => (
+                        <div className="container">
+                          <div
+                            {...getRootProps({
+                              className: "dropzone",
+                              onDrop: (event) => event.stopPropagation(),
+                            })}
+                          >
+                            <input {...getInputProps()} />
+                            <p className="text-gray-300 text-lg cursor-pointer hover:text-gray-500">
+                              Click here to Add Banner
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </Dropzone>
+                  </Container>
+                )}
 
+                <div className="text-red-500">
+                  {formik.touched.bannerImage && formik.errors.bannerImage}
+                </div>
+                <div className="">
                   {loading ? (
                     <button
                       type="submit"
                       className="py-2 w-32 bg-gray-700 hover:bg-gray-900 text-lime-400 font-semibold rounded transition duration-200"
                     >
-                      Please wait...
+                      <LoadingComponent />
                     </button>
                   ) : (
                     <button
@@ -136,8 +143,8 @@ const AddBanner = () => {
                       Add Banner
                     </button>
                   )}
-                </form>
-              </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>

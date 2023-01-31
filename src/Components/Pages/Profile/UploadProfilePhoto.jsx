@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { UploadIcon } from "@heroicons/react/outline";
 import Dropzone from "react-dropzone";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +26,7 @@ const Container = styled.div`
 `;
 
 const formSchema = Yup.object({
-  image: Yup.string().required("Image is required"),
+  profilePicture: Yup.string().required("Profile Picture is required"),
 });
 
 const UploadProfilePhoto = () => {
@@ -36,9 +36,12 @@ const UploadProfilePhoto = () => {
   //formik
   const formik = useFormik({
     initialValues: {
-      image: "",
+      profilePicture: "",
     },
     onSubmit: (values) => {
+      const data = {
+        profilePicture: values?.profilePicture,
+      };
       dispatch(uploadProfilePhototAction(values));
     },
     validationSchema: formSchema,
@@ -48,9 +51,25 @@ const UploadProfilePhoto = () => {
   const users = useSelector((state) => state?.users);
   const { profilePhoto, loading, appErr, serverErr, userAuth } = users;
 
+  // preview
+  const [preview, setPreview] = useState("");
+
   if (profilePhoto) {
     navigate(`/profile/${userAuth?._id}`);
   }
+
+  let image = formik?.values?.profilePicture;
+  useEffect(() => {
+    if (image) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(image);
+    } else {
+      setPreview(null);
+    }
+  }, [image]);
 
   return (
     <section className="min-h-screen  py-20 2xl:py-40 bg-white overflow-hidden font-display">
@@ -73,10 +92,10 @@ const UploadProfilePhoto = () => {
               ) : null}
               <Container className="">
                 <Dropzone
-                  onBlur={formik.handleBlur("image")}
+                  onBlur={formik.handleBlur("profilePicture")}
                   accept="image/jpeg, image/png"
                   onDrop={(acceptedFiles) => {
-                    formik.setFieldValue("image", acceptedFiles[0]);
+                    formik.setFieldValue("profilePicture", acceptedFiles[0]);
                   }}
                 >
                   {({ getRootProps, getInputProps }) => (
@@ -98,7 +117,7 @@ const UploadProfilePhoto = () => {
               </Container>
 
               <div className="text-red-500">
-                {formik.touched.image && formik.errors.image}
+                {formik.touched.profilePicture && formik.errors.profilePicture}
               </div>
               <p className="text-sm text-lime-400">
                 PNG, JPG, GIF minimum size 400kb uploaded only 1 image

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchShopsAction, fetchApprovedShopsAction } from "../../../Redux/Slices/shopSlices";
 import { fetchUsersAction } from "../../../Redux/Slices/userSlices";
+import { fetchBannerAction } from "../../../Redux/Slices/bannerSlices";
 import { FaUsers } from "react-icons/fa";
 import { GiVerticalBanner,GiShop } from "react-icons/gi";
 import { FcApproval } from "react-icons/fc";
@@ -9,7 +10,6 @@ import { MdOutlineError,MdPendingActions } from "react-icons/md";
 import { Link } from 'react-router-dom'
 import AddBanner from "../Banner/AddBanner";
 import AllBanners from "../Banner/AllBanners";
-
 
 const Dashboard = () => {
   // Select user from from store
@@ -32,11 +32,19 @@ const Dashboard = () => {
   const pendingShops = shops-approvedShops
   console.log(pendingShops);
 
+  // Select user from from store
+  const banner = useSelector((state) => state?.banners);
+  const { bannerList } = banner;
+
+  const allBanners = bannerList?.length;
+  console.log(allBanners);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchShopsAction());
     dispatch(fetchUsersAction());
     dispatch(fetchApprovedShopsAction());
+    dispatch(fetchBannerAction());
   }, [dispatch]);
 
   return (
@@ -120,7 +128,7 @@ const Dashboard = () => {
                 </div>
                 <div class="p-6">
                   <h5 class="text-pink-600 text-4xl font-medium mb-2">
-                    3{" "}
+                    {allBanners} {" "}
                     <span className="text-gray-400 text-sm font-medium">
                       {" "}
                       Banners
@@ -208,7 +216,6 @@ const Dashboard = () => {
         <div className="container mx-auto px-8 lg:px-6 flex flex-wrap justify-start h-72 overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400 scrollbar-thumb-rounded-full">
           <AllBanners/>
         </div>
-
       </section>
     </div>
   );

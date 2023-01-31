@@ -189,7 +189,7 @@ export const uploadProfilePhototAction = createAsyncThunk(
       //http call
       const formData = new FormData();
 
-      formData.append("image", userImg?.image);
+      formData.append("profilePicture", userImg?.profilePicture);
 
       const { data } = await axios.put(
         `${baseUrl}/api/users/profilephoto`,

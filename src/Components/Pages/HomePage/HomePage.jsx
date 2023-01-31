@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchShopsAction,
   fetchNewShopsAction,
-  fetchApprovedShopsAction
+  fetchApprovedShopsAction,
 } from "../../../Redux/Slices/shopSlices";
 import LoadingComponent from "../../../Utils/LoadingComponent";
 
@@ -14,7 +14,8 @@ const HomePage = () => {
 
   //select post from store
   const shop = useSelector((state) => state?.shops);
-  const { shopLists, loading, appErr, serverErr, newShopLists, shopsApproved } = shop;
+  const { shopLists, loading, appErr, serverErr, newShopLists, shopsApproved } =
+    shop;
 
   console.log(shopsApproved);
 
@@ -65,17 +66,16 @@ const HomePage = () => {
                   Check the newly Registered Shops
                 </p>
                 <div className="my-4 space-y-3">
-                {appErr || serverErr ? (
-                  <h1 className="text-red-600 text-2xl text-center">
-                    {serverErr} {appErr}
-                  </h1>
-                ) : newShopLists?.length <= 0 ? (
-                  <h1 className="text-3xl font-bold text-center">
-                    No Shops Found
-                  </h1>
-                ) : (
-                  newShopLists
-                    ?.map((shop) => (
+                  {appErr || serverErr ? (
+                    <h1 className="text-red-600 text-2xl text-center">
+                      {serverErr} {appErr}
+                    </h1>
+                  ) : newShopLists?.length <= 0 ? (
+                    <h1 className="text-3xl font-bold text-center">
+                      No Shops Found
+                    </h1>
+                  ) : (
+                    newShopLists?.map((shop) => (
                       <div
                         key={shop.id}
                         className="flex flex-wrap bg-white mb-4 border border-slate-300 rounded-lg shadow-md"
@@ -92,8 +92,10 @@ const HomePage = () => {
                         </div>
                         <div className="w-3/4 px-3 mt-10 sm:mb-6">
                           <div className="hover:underline">
-                            <Link to={`/shop/${shop.id}`}
-                            className="mb-1 text-2xl text-slate-800 font-bold font-heading cursor-pointer">
+                            <Link
+                              to={`/shop/${shop.id}`}
+                              className="mb-1 text-2xl text-slate-800 font-bold font-heading cursor-pointer"
+                            >
                               {/* {capitalizeWord(post?.title)} */}
                               {shop?.shopName}
                             </Link>
@@ -105,7 +107,7 @@ const HomePage = () => {
                         </div>
                       </div>
                     ))
-                )}
+                  )}
                 </div>
               </div>
 
@@ -122,7 +124,7 @@ const HomePage = () => {
                   shopsApproved
                     ?.filter((val) => {
                       if (keyword === "") {
-                        return val
+                        return val;
                       } else if (
                         val.shopLocation
                           ?.toLowerCase()
@@ -160,7 +162,9 @@ const HomePage = () => {
                           <p className="text-black line-clamp-3 ">
                             {shop?.mobileNum}
                           </p>
-                          <p className="text-black line-clamp-3 ">{shop?.mail}</p>
+                          <p className="text-black line-clamp-3 ">
+                            {shop?.mail}
+                          </p>
                           {/* Read more */}
                           <Link
                             to={`/shop/${shop.id}`}
