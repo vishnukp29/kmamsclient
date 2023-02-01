@@ -48,18 +48,16 @@ const AddBanner = () => {
 
   //store data
   const storeData = useSelector((store) => store?.banners);
-  const { loading, appErr, serverErr, bannerAdded } = storeData;
+  const { loading, appErr, serverErr, bannerAdded,isCreated } = storeData;
   console.log(bannerAdded);
 
   // preview
   const [preview, setPreview] = useState("");
 
-  if (bannerAdded) {
+  if (isCreated) {
     toast.success("Banner Image Added successfully");
     navigate(`/`);
   }
-
-  console.log(bannerAdded);
 
   let image = formik?.values?.bannerImage;
   useEffect(() => {

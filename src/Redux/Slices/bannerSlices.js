@@ -56,6 +56,7 @@ export const fetchBannerAction = createAsyncThunk(
 export const fetchBannerDetails = createAsyncThunk(
   "banner/detail",
   async (id, { rejectWithValue, getState, dispatch }) => {
+
     try {
       const { data } = await axios.get(`${baseUrl}/api/banner/${id}`);
       return data;

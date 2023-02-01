@@ -12,7 +12,7 @@ const ApproveModal = ({ open, setOpen, commentId, value }) => {
 
     //select Shop details from store
     const shop = useSelector((state) => state?.shops);
-    const { shopDetails, loading,approveShop } = shop;
+    const { shopDetails, loading,approveShop} = shop;
 
     // //Get login user
     // const user = useSelector(state => state.users);

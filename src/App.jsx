@@ -21,6 +21,8 @@ import AdminProtected from "./Components/Navigation/ProtectedRoutes/AdminProtect
 import UpdateShop from "./Components/Pages/Shop/UpdateShop";
 import ShopsList from "./Components/Pages/AllShops/ShopsList";
 import AdminShopDetails from "./Components/Pages/AllShops/AdminShopDetails";
+import BannerDetails from "./Components/Pages/Banner/BannerDetails";
+import NotFound from "./Components/Pages/NotFound/NotFound";
 
 
 function App() {
@@ -34,6 +36,7 @@ function App() {
           <Route path='/register' element={<Register/>}/>
           <Route path='/about-us' element={<AboutUs/>}/>
           <Route path='/contact-us' element={<ContactUs/>}/>
+          <Route path="*" element={<NotFound />} />
           
           <Route path='/dashboard' element={<AdminProtected><Dashboard/></AdminProtected>}/>
           <Route path='/retailors' element={<AdminProtected><RetailorsList/></AdminProtected>}/>
@@ -50,6 +53,7 @@ function App() {
           
           <Route path='/shop/:id' element={<ShopDetails/>}/>
           <Route path='/shopdetail/:id' element={<AdminProtected><AdminShopDetails/></AdminProtected>}/>
+          <Route path='/bannerdetail/:id' element={<PrivateProtected><BannerDetails/></PrivateProtected>}/>
         </Routes>
         <Footer />
       </Router>

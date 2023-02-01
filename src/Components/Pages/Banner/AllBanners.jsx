@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { fetchBannerAction,fetchBannerDetails } from "../../../Redux/Slices/bannerSlices";
+import { Link, useParams } from "react-router-dom";
+import { fetchBannerAction } from "../../../Redux/Slices/bannerSlices";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteBanner from "../../Modal/DeleteBanner";
-import { useParams } from "react-router-dom";
 
 const AllBanners = () => {
   const { id } = useParams();
+
   const banner = useSelector((state) => state?.banners);
   const { loading, appErr, serverErr, bannerList } = banner;
   console.log(bannerList);
@@ -19,7 +20,6 @@ const AllBanners = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchBannerAction());
-    dispatch(fetchBannerDetails());
   }, [id,dispatch]);
 
   return (
@@ -35,7 +35,7 @@ const AllBanners = () => {
           bannerList?.map((banner) => (
             <div
               key={banner.id}
-              className="block p-6 rounded-lg shadow-lg bg-white mt-2"
+              className="block p-3 rounded-lg shadow-lg bg-white mt-2 lg:w-1/3"
              >
               <div className="">
                   {/* Banner image */}
@@ -44,7 +44,14 @@ const AllBanners = () => {
                     src={banner?.bannerImage}
                     alt=""
                   />
-                  <DeleteBanner/>
+                  <Link
+                        to={`/bannerdetail/${banner?._id}`}
+                        className="bg-gray-900 text-lime-500 font-medium uppercase text-sm px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                       >
+                        View Banner
+                      </Link>
+                  {/* <DeleteBanner/> */}
               </div>
             </div>
           ))

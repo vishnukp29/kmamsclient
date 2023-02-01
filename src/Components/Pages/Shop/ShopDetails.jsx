@@ -68,7 +68,7 @@ const ShopDetails = () => {
                         to={`/updateshop/${shopDetails?._id}`}
                         className="bg-gray-900 text-lime-500 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
-                      >
+                       >
                         Edit Shop
                       </Link>
                       <DeleteShop />

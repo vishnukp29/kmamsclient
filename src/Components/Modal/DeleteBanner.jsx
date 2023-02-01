@@ -10,19 +10,19 @@ const DeleteBanner = ({ open, setOpen, commentId, value }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    //select Shop details from store
+    //select Banner details from store
     const banner = useSelector((state) => state?.banners);
     const { bannerDetails, loading,bannerDeleted, isDeleted } = banner;
 
     if(bannerDeleted){
       toast.success('Banner Removed successfully')
-       navigate("/"); 
+      navigate(`/`); 
     }
 
   return (
     <>
       <button
-        className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg transition transform hover:-translate-y-0.5"
+        className="bg-red-500 text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear  duration-150 transition transform hover:-translate-y-0.5"
         type="button"
         onClick={() => setShowModal(true)}
        >
