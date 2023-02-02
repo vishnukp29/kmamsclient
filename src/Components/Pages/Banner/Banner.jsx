@@ -73,7 +73,7 @@ const Banner = () => {
   return (
     <div ref={slideRef} className="w-full select-none relative">
       <div className="">
-        <img src={bannerArray[currentIndex]} alt="" />
+        <img src={bannerArray&&bannerArray[currentIndex]} alt="" />
       </div>
       <div className="absolute top-1/2 transform -translate-y-1/2 px-3 w-full flex justify-between items center">
         <button onClick={handleOnPrevClick} className='p-2 px-4 rounded-md bg-gray-800 bg-opacity-50 text-lime-400'>
