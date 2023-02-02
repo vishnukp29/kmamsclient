@@ -2,9 +2,9 @@ import React, { useEffect, useState,useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {HiArrowLeft,HiArrowRight} from "react-icons/hi";
 import { fetchBannerAction } from "../../../Redux/Slices/bannerSlices";
-import b1 from '../../../Logo/b1.png';
-import b2 from '../../../Logo/b2.png';
-import b3 from '../../../Logo/b3.png';
+// import b1 from '../../../Logo/b1.png';
+// import b2 from '../../../Logo/b2.png';
+// import b3 from '../../../Logo/b3.png';
 
 //const bannerArray = [b1,b2,b3]
 

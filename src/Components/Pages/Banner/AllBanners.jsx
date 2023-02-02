@@ -2,13 +2,12 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchBannerAction } from "../../../Redux/Slices/bannerSlices";
 import { useDispatch, useSelector } from "react-redux";
-import DeleteBanner from "../../Modal/DeleteBanner";
 
 const AllBanners = () => {
   const { id } = useParams();
 
   const banner = useSelector((state) => state?.banners);
-  const { loading, appErr, serverErr, bannerList } = banner;
+  const { appErr, serverErr, bannerList } = banner;
   console.log(bannerList);
 
   const bannerArray = bannerList?.map((obj) => {

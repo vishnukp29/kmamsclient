@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteShopAction , denyShopAction } from "../../Redux/Slices/shopSlices";
+import { denyShopAction } from "../../Redux/Slices/shopSlices";
 import {toast} from 'react-toastify'
 
 const DenyModal = ({ open, setOpen, commentId, value }) => {

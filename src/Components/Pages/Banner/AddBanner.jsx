@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { UploadIcon } from "@heroicons/react/outline";
 import Dropzone from "react-dropzone";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

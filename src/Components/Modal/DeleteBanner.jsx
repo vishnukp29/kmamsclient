@@ -12,7 +12,8 @@ const DeleteBanner = ({ open, setOpen, commentId, value }) => {
 
     //select Banner details from store
     const banner = useSelector((state) => state?.banners);
-    const { bannerDetails, loading,bannerDeleted, isDeleted } = banner;
+    const { bannerDetails, loading,bannerDeleted } = banner;
+    // const { bannerDetails, loading,bannerDeleted, isDeleted } = banner;
 
     if(bannerDeleted){
       toast.success('Banner Removed successfully')

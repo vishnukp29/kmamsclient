@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FcApproval } from "react-icons/fc";
 
 const ShopsListItem = (shop) => {
     
