@@ -2,11 +2,6 @@ import React, { useEffect, useState,useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {HiArrowLeft,HiArrowRight} from "react-icons/hi";
 import { fetchBannerAction } from "../../../Redux/Slices/bannerSlices";
-// import b1 from '../../../Logo/b1.png';
-// import b2 from '../../../Logo/b2.png';
-// import b3 from '../../../Logo/b3.png';
-
-//const bannerArray = [b1,b2,b3]
 
 let count = 0
 
@@ -73,7 +68,7 @@ const Banner = () => {
   return (
     <div ref={slideRef} className="w-full select-none relative">
       <div className="">
-        <img src={bannerArray&&bannerArray[currentIndex]} alt="" />
+        <img src={bannerArray && bannerArray[currentIndex]} alt="" />
       </div>
       <div className="absolute top-1/2 transform -translate-y-1/2 px-3 w-full flex justify-between items center">
         <button onClick={handleOnPrevClick} className='p-2 px-4 rounded-md bg-gray-800 bg-opacity-50 text-lime-400'>
