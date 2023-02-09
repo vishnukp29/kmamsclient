@@ -74,7 +74,7 @@ const Dashboard = () => {
                   <label
                     htmlFor=""
                     className="text-fuchsia-600 text-2xl font-medium"
-                  >
+                   >
                     <FaUsers />
                   </label>
                 </div>

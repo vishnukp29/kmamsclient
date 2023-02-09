@@ -58,7 +58,7 @@ const HomePage = () => {
 
           <div className="container px-4 mx-auto font-display ">
             <div className="max-w-sm w-full lg:max-w-full bg-opacity-25  mb-4  flex items-start sm:flex flex-wrap rounded-lg">
-              <div className="w-full max-w-sm p-4 bg-white border rounded-lg shadow-md sm:p-6 dark:bg-gray-800 dark:border-gray-700 mt-4 mx-4 lg:sticky-top">
+              <div className="w-full max-w-sm p-4 bg-white border rounded-lg shadow-md sm:p-2 dark:bg-gray-800 dark:border-gray-700 mt-4 mx-4 lg:sticky-top">
                 <h5 className="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
                   New Shops
                 </h5>

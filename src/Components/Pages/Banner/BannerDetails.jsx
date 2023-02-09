@@ -38,10 +38,10 @@ const BannerDetails = () => {
             </div>
           ) : (
             <div className="w-full mx-auto p-4 border border-sm rounded-md ">
-              <div className="flex justify-center mb-4 lg:h-64">
+              <div className="flex justify-center mb-4 ">
                 <img
                   alt="Banner"
-                  className=" w-full object-cover object-center rounded border border-gray-200"
+                  className=" w-full h-full object-cover object-center rounded border border-gray-200"
                   src={bannerDetails?.bannerImage}
                 />
               </div>
